@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "satisfactory-manager-ui"
+  "defaultProject": "satisfactory-manager-ui",
+  "cli": {
+    "analytics": false
+  }
 }
