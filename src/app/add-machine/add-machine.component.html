@@ -1,0 +1,68 @@
+<p>add-machine works!</p>
+
+<mat-vertical-stepper [linear]="true" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Pick a machine type</ng-template>
+      <mat-form-field>
+        <mat-label>Machine</mat-label>
+        <mat-select required [formControl]="machineControl">
+          <mat-option *ngFor="let machine of machines" [value]="machine.value">
+            {{ machine.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Select a recipe</ng-template>
+      <mat-form-field>
+        <mat-label>Recipe</mat-label>
+        <mat-select required [formControl]="recipeControl">
+          <mat-option *ngFor="let recipe of recipes" [value]="recipe.value">
+            {{ recipe.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Enter the clock speed and count</ng-template>
+      <div>
+        <mat-form-field>
+          <mat-label>Clock Speed</mat-label>
+          <input matInput type="number" formControlName="thirdCtrl" placeholder="Ex. 100" value="100" min="0" max="250" required />
+          <mat-error *ngIf="thirdFormGroup.invalid">Invalid clock speed</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Count</mat-label>
+          <input matInput type="number" formControlName="fourthCtrl" value="1" min="1" required />
+          <mat-error *ngIf="thirdFormGroup.invalid">Invalid count</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
